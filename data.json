@@ -1,0 +1,67 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "summonerName": "felmerv",
+      "videos": [
+        "sdfk",
+        "skfsdj"
+      ],
+      "date": 12
+    },
+    {
+      "id": "2",
+      "summonerName": "robot",
+      "videos": [
+        "dfs",
+        "skfsdj"
+      ],
+      "date": 324
+    },
+    {
+      "id": "3",
+      "summonerName": "manko",
+      "videos": [
+        "sdfk",
+        "adfa"
+      ],
+      "date": 324
+    },
+    {
+      "id": "4",
+      "summonerName": "handoel",
+      "videos": [
+        "dasfafdaf",
+        "adf"
+      ],
+      "date": 234
+    },
+    {
+      "id": "5",
+      "summonerName": "batmono",
+      "videos": [
+        "afafaf",
+        "skfsdj"
+      ],
+      "date": 234
+    },
+    {
+      "id": "6",
+      "summonerName": "ducko",
+      "videos": [
+        "afdaf",
+        "skfsdj"
+      ],
+      "date": 242
+    },
+    {
+      "summonerName": "bootlicker",
+      "videos": [
+        "dsjfal",
+        "alfa"
+      ],
+      "date": 19,
+      "id": "N78PfPH"
+    }
+  ]
+}

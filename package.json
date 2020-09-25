@@ -1,0 +1,32 @@
+{
+  "name": "graphql_server",
+  "version": "1.0.0",
+  "description": "GraphQL server for gaming highlight web storage application.",
+  "main": "server.js",
+  "scripts": {
+    "dev:server": "nodemon server.js",
+    "json:server": "json-server --watch data.json"
+  },
+  "author": "Elmer Vasquez",
+  "license": "ISC",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "axios": "^0.20.0",
+    "cloudinary": "^1.23.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "express-graphql": "^0.11.0",
+    "fs": "0.0.1-security",
+    "graphql": "^15.3.0",
+    "gridfs-stream": "^1.1.1",
+    "json-server": "^0.16.1",
+    "mime": "^2.4.6",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.6",
+    "nodemon": "^2.0.4",
+    "request": "^2.88.2",
+    "skipper": "^0.8.7",
+    "skipper-gridfs": "^1.0.2"
+  }
+}

@@ -2,20 +2,21 @@ const express = require('express');
 const app = express();
 const assert = require('assert');
 const fs = require('fs');
-const mongodb = require('mongodb');
-const expressGraphQL = require('express-graphql').graphqlHTTP;
-const schema = require('./schema.js');
-const uri = "mongodb+srv://elmer:elmer@elmer.wgqba.mongodb.net/gameHighlights?retryWrites=true&w=majority";
 
+const mongodb = require('mongodb');
+const uri = "mongodb+srv://elmer:elmer@elmer.wgqba.mongodb.net/gameHighlights?retryWrites=true&w=majority";
+const upload = require('express-fileupload');
 var dbName = "highlightDb";
-var gridfs = require('gridfs-stream');
 var path = require('path');
 const cors = require('cors');
 app.use(cors());
-const Grid = require('gridfs-stream');
+app.use(upload());
 const mime = require('mime');
+// const fileUpload = require('express-fileupload');
 
 const vidDir = path.join(__dirname + '/highlights/');
+
+
 
 
 app.post('/uploadVideo',(req,res) => {
@@ -25,14 +26,12 @@ app.post('/uploadVideo',(req,res) => {
         assert.ifError(error);
         const db = client.db(dbName);
         var bucket = new mongodb.GridFSBucket(db);
- 
+        // file = req.files.highlight
 
-        // var gfs = Grid(db,mongodb);
+        // file.mv('/highlights/video.mp4')
         
-        req.
-        pipe(bucket.openUploadStream('video.mp4',{
-          contentType: 'video/mp4'
-        })).
+        fs.createReadStream('./video.mp4').
+        pipe(bucket.openUploadStream('video.mp4')).
         on('error', function(error) {
           assert.ifError(error);
         }).
@@ -54,27 +53,26 @@ app.post('/uploadVideo',(req,res) => {
 
 
 app.get('/retrieveVideos',(req,res) => {
-
     mongodb.MongoClient.connect(uri,{useUnifiedTopology:true}, function(error,client){
         if (error) throw error;
         var db = client.db(dbName);
 
         var bucket = new mongodb.GridFSBucket(db);
-        bucket.find()
+        res.setHeader('Content-disposition', 'inline; filename=' +"video.mp4");
+        res.setHeader('Content-type', 'video/mp4');
         bucket.openDownloadStreamByName('video.mp4').
-        pipe(fs.createWriteStream('highlights/output.mp4')).
+        pipe(res).
         on('error', function(error) {
           assert.ifError(error);
         }).
         on('end', function() {
+
           console.log('nice');
-          process.exit(0);
         });
         
         // var gfs = Grid(db,mongodb);
         // gfs.createReadStream({filename:'video.mp4'}).pipe(fs.createWriteStream('./highlights/output.mp4'));
-        // res.setHeader('Content-disposition', 'attachment; filename=' +"video.mp4");
-        // res.setHeader('Content-type', 'video/mp4');
+
         // var bucket = new mongodb.GridFSBucket(db); 
         // var  readstream = gfs.createReadStream({filename:'video.mp4'});
         // readstream.pipe(res);
@@ -84,6 +82,6 @@ app.get('/retrieveVideos',(req,res) => {
 
 
 
-app.listen(4000, () =>{
-    console.log('Server is running on port 4000. (=')
+app.listen(8080, () =>{
+    console.log('Server is running on port 8080. (=')
 });
